@@ -3,7 +3,9 @@ import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { formatDistance } from "date-fns";
-import { Pencil, Trash2 } from "lucide-react";
+import { Pencil, Trash2, FolderKanban } from "lucide-react";
+import { useQuery } from "@tanstack/react-query";
+import type { Project } from "@shared/schema";
 
 interface TaskCardProps {
   task: Task;
@@ -24,10 +26,23 @@ const statusColors = {
 };
 
 export function TaskCard({ task, onEdit, onDelete }: TaskCardProps) {
+  const { data: project } = useQuery({
+    queryKey: ["/api/projects", task.projectId],
+    enabled: !!task.projectId,
+  });
+
   return (
     <Card className="w-full">
       <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-        <h3 className="font-semibold">{task.title}</h3>
+        <div className="space-y-1">
+          <h3 className="font-semibold">{task.title}</h3>
+          {project && (
+            <div className="flex items-center gap-1 text-xs text-muted-foreground">
+              <FolderKanban className="h-3 w-3" />
+              <span>{project.name}</span>
+            </div>
+          )}
+        </div>
         <div className="flex gap-2">
           <Button size="icon" variant="ghost" onClick={() => onEdit(task)}>
             <Pencil className="h-4 w-4" />

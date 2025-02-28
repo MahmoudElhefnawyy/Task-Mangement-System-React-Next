@@ -8,6 +8,7 @@ import Dashboard from "@/pages/Dashboard";
 import Profile from "@/pages/Profile";
 import Settings from "@/pages/Settings";
 import Tasks from "@/pages/Tasks";
+import Projects from "@/pages/Projects";
 import { Sidebar } from "@/components/Sidebar";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { useState } from "react";
@@ -48,6 +49,7 @@ function Router() {
           <Switch>
             <Route path="/" component={Dashboard} />
             <Route path="/tasks" component={Tasks} />
+            <Route path="/projects" component={Projects} />
             <Route path="/profile" component={Profile} />
             <Route path="/settings" component={Settings} />
             <Route component={NotFound} />

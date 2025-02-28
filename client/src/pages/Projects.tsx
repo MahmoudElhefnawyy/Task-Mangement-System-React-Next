@@ -56,7 +56,8 @@ export default function Projects() {
 
   const deleteProject = useMutation({
     mutationFn: async (id: number) => {
-      await apiRequest("DELETE", `/api/projects/${id}`);
+      const res = await apiRequest("DELETE", `/api/projects/${id}`);
+      return res.json();
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["/api/projects"] });
@@ -149,7 +150,7 @@ export default function Projects() {
       <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>{editingProject ? "Edit" : "Create"} Project</DialogTitle>
+            <DialogTitle>{editingProject ? "Edit Project" : "Create Project"}</DialogTitle>
           </DialogHeader>
           <ProjectForm
             project={editingProject}
@@ -169,112 +170,14 @@ export default function Projects() {
           </DialogHeader>
           <TaskForm
             onSubmit={(data) => createTask.mutate({ ...data, projectId: selectedProject?.id })}
-            onCancel={() => setTaskDialogOpen(false)}
+            onCancel={() => {
+              setTaskDialogOpen(false);
+              setSelectedProject(undefined);
+            }}
+            defaultValues={{ projectId: selectedProject?.id }}
           />
         </DialogContent>
       </Dialog>
-    </div>
-  );
-}
-import { useState } from "react";
-import { useQuery, useMutation } from "@tanstack/react-query";
-import { apiRequest } from "@/lib/queryClient";
-import { queryClient } from "@/lib/queryClient";
-import { type Project, type InsertProject } from "@shared/schema";
-import { ProjectList } from "@/components/projects/ProjectList";
-import { useToast } from "@/hooks/use-toast";
-import { AddTaskToProjectDialog } from "@/components/projects/AddTaskToProjectDialog";
-
-export default function Projects() {
-  const { toast } = useToast();
-  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
-  const [isAddTaskDialogOpen, setIsAddTaskDialogOpen] = useState(false);
-
-  const { data: projects = [], isLoading } = useQuery<Project[]>({
-    queryKey: ["/api/projects"],
-  });
-
-  const createProject = useMutation({
-    mutationFn: async (data: InsertProject) => {
-      const res = await apiRequest("POST", "/api/projects", data);
-      return res.json();
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["/api/projects"] });
-      toast({ title: "Project created successfully" });
-    },
-  });
-
-  const updateProject = useMutation({
-    mutationFn: async ({ id, data }: { id: number; data: any }) => {
-      const res = await apiRequest("PATCH", `/api/projects/${id}`, data);
-      return res.json();
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["/api/projects"] });
-      toast({ title: "Project updated successfully" });
-    },
-  });
-
-  const deleteProject = useMutation({
-    mutationFn: async (id: number) => {
-      await apiRequest("DELETE", `/api/projects/${id}`);
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["/api/projects"] });
-      toast({ title: "Project deleted successfully" });
-    },
-  });
-
-  const createTask = useMutation({
-    mutationFn: async (data: any) => {
-      const res = await apiRequest("POST", "/api/tasks", data);
-      return res.json();
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["/api/tasks"] });
-      toast({ title: "Task added to project successfully" });
-      setIsAddTaskDialogOpen(false);
-    },
-  });
-
-  const handleAddTask = (project: Project) => {
-    setSelectedProject(project);
-    setIsAddTaskDialogOpen(true);
-  };
-
-  const handleAddTaskSubmit = (taskData: any) => {
-    createTask.mutate(taskData);
-  };
-
-  if (isLoading) {
-    return (
-      <div className="p-6">
-        <div className="h-[400px] flex items-center justify-center">
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
-        </div>
-      </div>
-    );
-  }
-
-  return (
-    <div className="p-6">
-      <h1 className="text-2xl font-bold mb-6">Projects</h1>
-      <ProjectList
-        projects={projects}
-        onEdit={(project) => console.log("Edit project", project)}
-        onDelete={(id) => deleteProject.mutate(id)}
-        onAddTask={handleAddTask}
-      />
-
-      {selectedProject && (
-        <AddTaskToProjectDialog
-          project={selectedProject}
-          isOpen={isAddTaskDialogOpen}
-          onClose={() => setIsAddTaskDialogOpen(false)}
-          onSubmit={handleAddTaskSubmit}
-        />
-      )}
     </div>
   );
 }

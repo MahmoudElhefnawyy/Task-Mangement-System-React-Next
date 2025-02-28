@@ -5,17 +5,25 @@ A powerful, feature-rich task management application built with React, Express, 
 
 ## Features
 
-✅ **Task Dashboard**: View task statistics, completion rates, and upcoming deadlines at a glance.
+- ✅ **Task Dashboard**: View task statistics, completion rates, and upcoming deadlines at a glance.
 
-📋 **Task Management**: Create, update, and delete tasks with priority levels and status tracking.
-📂 **Project Organization**: Group related tasks into projects for better organization.
-🔄 **Task Status Tracking**: Track progress with custom statuses (To Do, In Progress, Completed).
-⏱️ **Task Prioritization**: Set priority levels for tasks (High, Medium, Low).
-🎨 **Modern UI**: Beautiful and intuitive interface built with Shadcn UI components.
-🌙 **Dark/Light Theme**: Switch between dark and light themes for a personalized experience.
-📱 **Mobile-Responsive Design**: Fully responsive design for seamless use on all devices.
-🔍 **Task Filtering & Search**: Find tasks quickly with powerful filtering capabilities.
-📊 **Progress Visualization**: Visual representation of task completion with progress bars.
+- 📋 **Task Management**: Create, update, and delete tasks with priority levels and status tracking.
+
+- 📂 **Project Organization**: Group related tasks into projects for better organization.
+
+- 🔄 **Task Status Tracking**: Track progress with custom statuses (To Do, In Progress, Completed).
+
+- ⏱️ **Task Prioritization**: Set priority levels for tasks (High, Medium, Low).
+
+- 🎨 **Modern UI**: Beautiful and intuitive interface built with Shadcn UI components.
+
+- 🌙 **Dark/Light Theme**: Switch between dark and light themes for a personalized experience.
+
+- 📱 **Mobile-Responsive Design**: Fully responsive design for seamless use on all devices.
+
+- 🔍 **Task Filtering & Search**: Find tasks quickly with powerful filtering capabilities.
+
+- 📊 **Progress Visualization**: Visual representation of task completion with progress bars.
 
 ## Tech Stack
 

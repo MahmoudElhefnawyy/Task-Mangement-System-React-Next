@@ -1,20 +1,24 @@
 import { type Project } from "@shared/schema";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Pencil, Trash2 } from "lucide-react";
+import { Pencil, Trash2, Plus } from "lucide-react";
 
 interface ProjectCardProps {
   project: Project;
   onEdit: (project: Project) => void;
   onDelete: (id: number) => void;
+  onAddTask: (project: Project) => void;
 }
 
-export function ProjectCard({ project, onEdit, onDelete }: ProjectCardProps) {
+export function ProjectCard({ project, onEdit, onDelete, onAddTask }: ProjectCardProps) {
   return (
     <Card className="w-full" style={{ borderLeftColor: project.color, borderLeftWidth: '4px' }}>
       <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
         <h3 className="font-semibold">{project.name}</h3>
         <div className="flex gap-2">
+          <Button size="icon" variant="ghost" onClick={() => onAddTask(project)}>
+            <Plus className="h-4 w-4" />
+          </Button>
           <Button size="icon" variant="ghost" onClick={() => onEdit(project)}>
             <Pencil className="h-4 w-4" />
           </Button>
@@ -29,7 +33,7 @@ export function ProjectCard({ project, onEdit, onDelete }: ProjectCardProps) {
         </div>
       </CardHeader>
       <CardContent>
-        <p className="text-sm text-muted-foreground">{project.description}</p>
+        <p className="text-sm text-muted-foreground mb-4">{project.description}</p>
       </CardContent>
     </Card>
   );

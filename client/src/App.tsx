@@ -10,7 +10,7 @@ import Settings from "@/pages/Settings";
 import Tasks from "@/pages/Tasks";
 import Projects from "@/pages/Projects";
 import { Sidebar } from "@/components/Sidebar";
-import { ThemeToggle } from "@/components/ThemeToggle";
+import { Header } from "@/components/Header";
 import { useState } from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { TaskForm } from "@/components/tasks/TaskForm";
@@ -41,33 +41,33 @@ function Router() {
   return (
     <div className="flex h-screen">
       <Sidebar onNewTask={() => setDialogOpen(true)} />
-      <main className="flex-1 overflow-auto">
-        <div className="p-4 flex justify-end">
-          <ThemeToggle />
-        </div>
-        <div className="px-6">
-          <Switch>
-            <Route path="/" component={Dashboard} />
-            <Route path="/tasks" component={Tasks} />
-            <Route path="/projects" component={Projects} />
-            <Route path="/profile" component={Profile} />
-            <Route path="/settings" component={Settings} />
-            <Route component={NotFound} />
-          </Switch>
-        </div>
+      <div className="flex-1 flex flex-col overflow-hidden">
+        <Header />
+        <main className="flex-1 overflow-auto">
+          <div className="px-6">
+            <Switch>
+              <Route path="/" component={Dashboard} />
+              <Route path="/tasks" component={Tasks} />
+              <Route path="/projects" component={Projects} />
+              <Route path="/profile" component={Profile} />
+              <Route path="/settings" component={Settings} />
+              <Route component={NotFound} />
+            </Switch>
+          </div>
 
-        <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
-          <DialogContent>
-            <DialogHeader>
-              <DialogTitle>Create New Task</DialogTitle>
-            </DialogHeader>
-            <TaskForm
-              onSubmit={handleNewTask}
-              onCancel={() => setDialogOpen(false)}
-            />
-          </DialogContent>
-        </Dialog>
-      </main>
+          <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
+            <DialogContent>
+              <DialogHeader>
+                <DialogTitle>Create New Task</DialogTitle>
+              </DialogHeader>
+              <TaskForm
+                onSubmit={handleNewTask}
+                onCancel={() => setDialogOpen(false)}
+              />
+            </DialogContent>
+          </Dialog>
+        </main>
+      </div>
     </div>
   );
 }

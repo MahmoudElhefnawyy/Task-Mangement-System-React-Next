@@ -6,6 +6,7 @@ import { Toaster } from "@/components/ui/toaster";
 import NotFound from "@/pages/not-found";
 import Dashboard from "@/pages/Dashboard";
 import Profile from "@/pages/Profile";
+import Settings from "@/pages/Settings";
 import { Sidebar } from "@/components/Sidebar";
 import { ThemeToggle } from "@/components/ThemeToggle";
 
@@ -21,6 +22,7 @@ function Router() {
           <Switch>
             <Route path="/" component={Dashboard} />
             <Route path="/profile" component={Profile} />
+            <Route path="/settings" component={Settings} />
             <Route component={NotFound} />
           </Switch>
         </div>

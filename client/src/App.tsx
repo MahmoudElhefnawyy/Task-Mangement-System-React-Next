@@ -7,6 +7,7 @@ import NotFound from "@/pages/not-found";
 import Dashboard from "@/pages/Dashboard";
 import Profile from "@/pages/Profile";
 import Settings from "@/pages/Settings";
+import Tasks from "@/pages/Tasks";
 import { Sidebar } from "@/components/Sidebar";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { useState } from "react";
@@ -27,7 +28,7 @@ function Router() {
       queryClient.invalidateQueries({ queryKey: ["/api/tasks"] });
       toast({ title: "Task created successfully" });
       setDialogOpen(false);
-      navigate("/");
+      navigate("/tasks");
     } catch (error) {
       toast({ 
         title: "Failed to create task", 
@@ -46,6 +47,7 @@ function Router() {
         <div className="px-6">
           <Switch>
             <Route path="/" component={Dashboard} />
+            <Route path="/tasks" component={Tasks} />
             <Route path="/profile" component={Profile} />
             <Route path="/settings" component={Settings} />
             <Route component={NotFound} />

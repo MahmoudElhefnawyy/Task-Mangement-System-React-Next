@@ -85,14 +85,17 @@ export function TaskForm({ task, onSubmit, onCancel }: TaskFormProps) {
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Project</FormLabel>
-                <Select onValueChange={(value) => field.onChange(Number(value))} value={field.value?.toString()}>
+                <Select 
+                  onValueChange={(value) => field.onChange(value === "null" ? null : Number(value))} 
+                  value={field.value?.toString() || "null"}
+                >
                   <FormControl>
                     <SelectTrigger>
                       <SelectValue placeholder="Select a project" />
                     </SelectTrigger>
                   </FormControl>
                   <SelectContent>
-                    <SelectItem value="">No Project</SelectItem>
+                    <SelectItem value="null">No Project</SelectItem>
                     {projects.map((project) => (
                       <SelectItem key={project.id} value={project.id.toString()}>
                         {project.name}

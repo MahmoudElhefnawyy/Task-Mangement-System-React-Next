@@ -72,6 +72,8 @@ function Router() {
   );
 }
 
+// Wrap the App component with NotificationProvider in your index file
+
 function App() {
   return (
     <ThemeProvider attribute="class" defaultTheme="system" enableSystem>

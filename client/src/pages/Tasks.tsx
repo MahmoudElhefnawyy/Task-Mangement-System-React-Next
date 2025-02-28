@@ -4,13 +4,22 @@ import { queryClient } from "@/lib/queryClient";
 import { type Task } from "@shared/schema";
 import { TaskList } from "@/components/tasks/TaskList";
 import { useToast } from "@/hooks/use-toast";
+import { useNotifications } from "@/components/notifications/NotificationProvider";
+import { useEffect } from "react";
 
 export default function Tasks() {
   const { toast } = useToast();
+  const { checkDueDates } = useNotifications();
 
   const { data: tasks = [], isLoading } = useQuery<Task[]>({
     queryKey: ["/api/tasks"],
   });
+  
+  useEffect(() => {
+    if (tasks.length > 0) {
+      checkDueDates(tasks);
+    }
+  }, [tasks, checkDueDates]);
 
   const createTask = useMutation({
     mutationFn: async (data: any) => {

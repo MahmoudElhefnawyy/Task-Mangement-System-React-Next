@@ -2,6 +2,7 @@ import { ThemeToggle } from "@/components/ThemeToggle";
 import { Button } from "@/components/ui/button";
 import { Bell } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
+import { NotificationCenter } from "@/components/notifications/NotificationCenter"; // Added import
 
 export function Header() {
   return (
@@ -12,6 +13,7 @@ export function Header() {
             <Bell className="h-5 w-5" />
           </Button>
           <Separator orientation="vertical" className="h-6" />
+          <NotificationCenter /> {/* Added NotificationCenter */}
           <ThemeToggle />
         </div>
       </div>

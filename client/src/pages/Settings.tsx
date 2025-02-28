@@ -51,7 +51,9 @@ export default function Settings() {
                   Receive notifications for upcoming tasks
                 </p>
               </div>
-              <Switch defaultChecked />
+              <Switch defaultChecked onChange={(e) => {
+                localStorage.setItem("enableTaskReminders", e.target.checked.toString());
+              }} />
             </div>
             <Separator />
             <div className="flex items-center justify-between">
@@ -61,7 +63,33 @@ export default function Settings() {
                   Get notified when tasks are nearly due
                 </p>
               </div>
-              <Switch defaultChecked />
+              <Switch defaultChecked onChange={(e) => {
+                localStorage.setItem("enableDueDateAlerts", e.target.checked.toString());
+              }} />
+            </div>
+            <Separator />
+            <div className="flex items-center justify-between">
+              <div className="space-y-0.5">
+                <Label>Browser Notifications</Label>
+                <p className="text-sm text-muted-foreground">
+                  Show desktop notifications (requires permission)
+                </p>
+              </div>
+              <Button 
+                variant="outline" 
+                size="sm"
+                onClick={() => {
+                  Notification.requestPermission().then(permission => {
+                    if (permission === "granted") {
+                      new Notification("Notifications Enabled", {
+                        body: "You will now receive browser notifications for tasks"
+                      });
+                    }
+                  });
+                }}
+              >
+                Enable
+              </Button>
             </div>
           </CardContent>
         </Card>

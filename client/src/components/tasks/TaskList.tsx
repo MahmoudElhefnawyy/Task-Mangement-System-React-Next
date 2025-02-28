@@ -6,6 +6,8 @@ import { Input } from "@/components/ui/input";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { TaskForm } from "./TaskForm";
 import { Search } from "lucide-react";
+import { TaskExport } from "./TaskExport";
+import { TaskTemplates } from "./TaskTemplates";
 
 interface TaskListProps {
   tasks: Task[];
@@ -55,8 +57,17 @@ export function TaskList({
             className="pl-9"
           />
         </div>
+        <TaskExport tasks={tasks} />
         <Button onClick={() => setDialogOpen(true)}>New Task</Button>
       </div>
+      
+      <TaskTemplates onApplyTemplate={(templateData) => {
+        setDialogOpen(true);
+        setEditingTask(undefined);
+        setTimeout(() => {
+          handleSubmit(templateData);
+        }, 100);
+      }} />
 
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
         {filteredTasks.map((task) => (

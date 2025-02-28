@@ -9,6 +9,7 @@ import {
   ChevronLeft,
   ChevronRight,
   Plus,
+  UserCircle,
 } from "lucide-react";
 
 interface SidebarProps {
@@ -23,6 +24,7 @@ export function Sidebar({ onNewTask }: SidebarProps) {
     { href: "/tasks", icon: ListTodo, label: "Tasks" },
     { href: "/", icon: LayoutDashboard, label: "Dashboard" },
     { href: "/settings", icon: Settings, label: "Settings" },
+    { href: "/profile", icon: UserCircle, label: "Profile" },
   ];
 
   return (

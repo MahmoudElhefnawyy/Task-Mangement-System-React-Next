@@ -5,6 +5,7 @@ import { queryClient } from "./lib/queryClient";
 import { Toaster } from "@/components/ui/toaster";
 import NotFound from "@/pages/not-found";
 import Dashboard from "@/pages/Dashboard";
+import Profile from "@/pages/Profile";
 import { Sidebar } from "@/components/Sidebar";
 import { ThemeToggle } from "@/components/ThemeToggle";
 
@@ -19,6 +20,7 @@ function Router() {
         <div className="px-6">
           <Switch>
             <Route path="/" component={Dashboard} />
+            <Route path="/profile" component={Profile} />
             <Route component={NotFound} />
           </Switch>
         </div>

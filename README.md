@@ -6,6 +6,7 @@ A powerful, feature-rich task management application built with React, Express, 
 ## Features
 
 ✅ **Task Dashboard**: View task statistics, completion rates, and upcoming deadlines at a glance.
+
 📋 **Task Management**: Create, update, and delete tasks with priority levels and status tracking.
 📂 **Project Organization**: Group related tasks into projects for better organization.
 🔄 **Task Status Tracking**: Track progress with custom statuses (To Do, In Progress, Completed).
